@@ -31,15 +31,15 @@ class Bot(commands.Bot):
         response = f"Pong! Latency {latency} ms"
         await ctx.send(response)
 
-    #@commands.Cog.listener()
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.user:
             return
 
         if message.content.startswith(self.command_prefix):
             await self.process_commands(message)
-            # res = bot.respond(message.content)
-            # await message.channel.send(res)
+            res = self.respond(message.content)
+            await message.channel.send(res)
 
     def toggle_stats_ui(self, content, messages):
         if self.stats_ui:
